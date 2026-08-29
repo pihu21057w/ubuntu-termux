@@ -3,7 +3,7 @@
 </p>
 <p align="center">
 <img src="https://img.shields.io/badge/MADE%20IN-BANGLADESH-green?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge">
-<img src="https://img.shields.io/badge/Version-2.0-blue?style=for-the-badge">
+<img src="https://img.shields.io/badge/Version-3.0-blue?style=for-the-badge">
 </p>
 <p align="center">
 <img src="https://img.shields.io/badge/Written%20In-Bash-darkgreen?style=flat-square">
@@ -12,19 +12,52 @@
 <img src="https://img.shields.io/github/issues/modded-ubuntu/modded-ubuntu?color=red&style=flat-square">
 <img src="https://img.shields.io/github/forks/modded-ubuntu/modded-ubuntu?color=teal&style=flat-square">
 </p>
-<p align="center"><b>Run Ubuntu GUI on your termux with much features.</b></p>
+<p align="center"><b>Run Ubuntu 26.04 GUI on your termux with much features.</b></p>
 
 ### Features
 
+- Ubuntu 26.04 LTS (Noble Numbat) based
 - Fixed Audio Output
 - Lightweight {Requires at least 4GB Storage}
-- 2 Browsers (Chromium & Mozilla Firefox)
-- Supports Bangla Fonts
-- VLC Media Player and MPV media player
-- Visual Studio Code (buggy on arm )
-- Sublime Text Editor (only for arm64/aarch64)
+- **Multiple Browser Options:**
+  - Firefox (Default)
+  - Chromium
+- **Development Environments:**
+  - Visual Studio Code (buggy on arm)
+  - Sublime Text Editor (arm64/aarch64 only)
+- **Office Suite:** LibreOffice (Optional)
+- **Graphics Editor:** GIMP (Optional)
+- **Development Tools:**
+  - Python 3 with pip
+  - Node.js with npm
+  - Java JDK
+  - Go (Golang)
+  - Rust with Cargo
+  - C/C++ (gcc, g++, make, cmake)
+- **System Utilities:**
+  - Multiple file managers (Nemo, PCManFM, Nautilus)
+  - System monitoring tools (htop, btop, neofetch)
+  - Docker CLI & Docker Compose
+  - Thunderbird Email Client
+- **Media Players:**
+  - VLC Media Player
+  - MPV Media Player
+- **Fonts:**
+  - Bangla Fonts Support
+  - Noto Fonts
+  - JetBrains Mono
+  - Fira Code
+  - Cascadia Code
+  - And more...
+- **Themes & Customization:**
+  - Cool pre-installed themes
+  - XFCE4 Desktop Environment
+- **Easy Management:**
+  - Built-in utilities menu for system management
+  - Extra features installer
+  - VNC resolution changer
+  - System cleaner and updater
 - Easy for Beginners
-- Comes with some cool themes.
 
 ### Installation
 - Firstly install [Termux](https://termux.com) apk from [HERE](https://f-droid.org/repo/com.termux_118.apk)
@@ -50,7 +83,7 @@
 
 - **You have to note your VNC password !!**
 
-- Ubuntu image is now successfully installed .
+- Ubuntu 26.04 image is now successfully installed .
 
   - Type `vncstart` to run Vncserver
   - Type `vncstop` to stop Vncserver
@@ -67,22 +100,41 @@
 - **Type `ubuntu` to run Ubuntu CLI.**
 - **Type `vncstart` to run Vncserver**
 - **Type `vncstop` to stop Vncserver**
+- **Type `bash utilities.sh` to open system management menu**
+- **Type `bash extras.sh` to install additional features**
+- **Type `bash remove.sh` to remove Ubuntu Modded OS**
 
-- **Type `bash remove.sh` to remove Ubuntu Modded Os**
+### Available Commands Inside Ubuntu:
+
+- **`sudo bash gui.sh`** - Initial GUI setup (first time only)
+- **`sudo bash extras.sh`** - Install additional software (LibreOffice, GIMP, etc.)
+- **`sudo bash utilities.sh`** - System management utilities menu
+- **`vncstart`** - Start VNC server
+- **`vncstop`** - Stop VNC server
+- **`htop`** - Monitor system resources (if installed)
+- **`neofetch`** - Display system information (if installed)
 
 ### Video Tutorial : 
 
 [![Watch the Tutorial](./distro/image1.jpg)](https://mega.nz/embed/QvIC1TLQ#3z27MRNPwANAg6JTtx1Ei8kDouOZsZgk00bg4TsJMNQ!1m)
 
 #
-### Click to see the [Changelog](./CHANGELOG.md)
+### Documentation
+
+- 📋 [Complete Features Guide](./FEATURES.md) - Detailed list of all available features
+- 📝 [Changelog](./CHANGELOG.md) - Version history and updates
+- 🔄 [Upgrade Notes](./UPGRADE_NOTES.md) - Information about upgrading to 26.04
+
+#
+
 Licensed under [Apache License](./LICENSE)
+
 #
 
 ### Credits : 
 
 ```
-This Tool Uses the ubuntu image provided by the termux package `proot-distro` 
+This Tool Uses the Ubuntu 26.04 image provided by the termux package `proot-distro` 
 
 Full Credit of the Ubuntu image goes to them .
 

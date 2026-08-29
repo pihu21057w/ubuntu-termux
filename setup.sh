@@ -20,8 +20,8 @@ banner() {
     printf "\033[36m    |  | |__] |  | |\ |  |  |  |    |\/| |  | |  \ \033[0m\n"
     printf "\033[32m    |__| |__] |__| | \|  |  |__|    |  | |__| |__/ \033[0m\n"
     printf "\033[0m\n"
-    printf "     \033[32mA modded gui version of ubuntu for Termux\033[0m\n"
-    printf "                 \033[33mVersion : \033[32m2.0\033[0m\n\n"
+    printf "     \033[32mA modded gui version of Ubuntu 26.04 for Termux\033[0m\n"
+    printf "                 \033[33mVersion : \033[32m3.0\033[0m\n\n"
 }
 
 package() {
@@ -47,10 +47,10 @@ distro() {
 		sleep 1.5
 		exit 0
 	else
-		echo -e "\n${R} [${W}-${R}]${C} Installing Ubuntu rootfs..."${W}
+		echo -e "\n${R} [${W}-${R}]${C} Installing Ubuntu 26.04 rootfs..."${W}
 		proot-distro install ubuntu:26.04
 		termux-reload-settings
-		echo -e "\n${R} [${W}-${R}]${G} Ubuntu image successfully installed!"${W}
+		echo -e "\n${R} [${W}-${R}]${G} Ubuntu 26.04 image successfully installed!"${W}
 		sleep 2
 	fi
 }

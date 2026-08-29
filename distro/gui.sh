@@ -36,8 +36,8 @@ banner() {
     printf "\033[36m    |  | |__] |  | |\ |  |  |  |    |\/| |  | |  \ \033[0m\n"
     printf "\033[32m    |__| |__] |__| | \|  |  |__|    |  | |__| |__/ \033[0m\n"
     printf "\033[0m\n"
-    printf "     \033[32mA modded gui version of ubuntu for Termux\033[0m\n"
-    printf "                 \033[33mVersion : \033[32m2.0\033[0m\n\n"
+    printf "     \033[32mA modded gui version of Ubuntu 26.04 for Termux\033[0m\n"
+    printf "                 \033[33mVersion : \033[32m3.0\033[0m\n\n"
 }
 
 package() {
@@ -323,10 +323,34 @@ config() {
 	banner
 }
 
+extras_menu() {
+	cat <<- EOF
+
+		${R} [${W}-${R}]${G} EXTRA FEATURES AVAILABLE!
+
+		${Y} Would you like to install additional features?${W}
+		${C} (LibreOffice, GIMP, Development Tools, etc.)${W}
+
+		${C} [${W}y${C}] Yes - Open extras menu${W}
+		${C} [${W}n${C}] No - Skip for now${W}
+
+	EOF
+	read -n1 -p "${R} [${G}~${R}]${Y} Your choice (y/n): ${G}" EXTRAS_CHOICE
+	echo -e "\n"
+	
+	if [[ "$EXTRAS_CHOICE" =~ ^[Yy]$ ]]; then
+		run_script "extras.sh"
+	else
+		echo -e "${Y}You can install extras later by running: ${G}sudo bash extras.sh${W}\n"
+		sleep 2
+	fi
+}
+
 # ----------------------------
 # turip, ip ip, turip ip ip ip, turip ip ip ip
 check_root
 package
 install_softwares
 config
+extras_menu
 note

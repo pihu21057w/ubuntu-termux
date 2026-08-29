@@ -15,8 +15,8 @@ banner() {
     printf "\033[36m    |  | |__] |  | |\ |  |  |  |    |\/| |  | |  \ \033[0m\n"
     printf "\033[32m    |__| |__] |__| | \|  |  |__|    |  | |__| |__/ \033[0m\n"
     printf "\033[0m\n"
-    printf "     \033[32mA modded gui version of ubuntu for Termux\033[0m\n"
-    printf "                 \033[33mVersion : \033[32m2.0\033[0m\n\n"
+    printf "     \033[32mA modded gui version of Ubuntu 26.04 for Termux\033[0m\n"
+    printf "                 \033[33mVersion : \033[32m3.0\033[0m\n\n"
 }
 
 sudo_install() {
@@ -82,19 +82,17 @@ EOF
     if [[ -d '/data/data/com.termux/files/home/modded-ubuntu/distro' ]]; then
         cp /data/data/com.termux/files/home/modded-ubuntu/distro/gui.sh /home/"${user}"/gui.sh
         chmod +x /home/"${user}"/gui.sh
-        cp -f /data/data/com.termux/files/home/modded-ubuntu/distro/firefox.sh /home/"${user}"/softwares/
-        cp -f /data/data/com.termux/files/home/modded-ubuntu/distro/chromium.sh /home/"${user}"/softwares/
-        cp -f /data/data/com.termux/files/home/modded-ubuntu/distro/vscode.sh /home/"${user}"/softwares/
-        cp -f /data/data/com.termux/files/home/modded-ubuntu/distro/sublime.sh /home/"${user}"/softwares/
+        cp -f /data/data/com.termux/files/home/modded-ubuntu/distro/*.sh /home/"${user}"/softwares/
         chmod +x /home/"${user}"/softwares/*.sh || true
     else
         wget -q --show-progress https://raw.githubusercontent.com/modded-ubuntu/modded-ubuntu/master/distro/gui.sh -O /home/"${user}"/gui.sh
         chmod +x /home/"${user}"/gui.sh || true
 
-        wget -q -P /home/"${user}"/softwares/ https://raw.githubusercontent.com/modded-ubuntu/modded-ubuntu/master/distro/firefox.sh
-        wget -q -P /home/"${user}"/softwares/ https://raw.githubusercontent.com/modded-ubuntu/modded-ubuntu/master/distro/chromium.sh
-        wget -q -P /home/"${user}"/softwares/ https://raw.githubusercontent.com/modded-ubuntu/modded-ubuntu/master/distro/vscode.sh
-        wget -q -P /home/"${user}"/softwares/ https://raw.githubusercontent.com/modded-ubuntu/modded-ubuntu/master/distro/sublime.sh
+        # Download all feature scripts
+        scripts=(firefox.sh chromium.sh vscode.sh sublime.sh extras.sh utilities.sh libreoffice.sh gimp.sh thunderbird.sh file-managers.sh docker.sh fonts-extra.sh htop.sh development-tools.sh)
+        for script in "${scripts[@]}"; do
+            wget -q -P /home/"${user}"/softwares/ https://raw.githubusercontent.com/modded-ubuntu/modded-ubuntu/master/distro/"$script" || true
+        done
         chmod +x /home/"${user}"/softwares/*.sh || true
     fi
 
