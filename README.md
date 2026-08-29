@@ -80,7 +80,9 @@
    - `ubuntu`
    - `sudo bash gui.sh`
 
-- **You have to note your VNC password !!**
+- **During gui.sh, you will be prompted to set a VNC password!**
+- **The password will be visible as you type it (6-8 characters required)**
+- **Remember this password - you'll need it to connect via VNC Viewer**
 
 - Ubuntu 26.04 image is now successfully installed .
 
@@ -110,6 +112,8 @@
 - **`sudo bash utilities.sh`** - System management utilities menu
 - **`vncstart`** - Start VNC server
 - **`vncstop`** - Stop VNC server
+- **`vncpasswd`** - Change VNC password anytime
+- **`bash vnc-password-reset.sh`** - Reset VNC password with guided interface
 - **`htop`** - Monitor system resources (if installed)
 - **`neofetch`** - Display system information (if installed)
 

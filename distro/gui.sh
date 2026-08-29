@@ -157,6 +157,11 @@ note() {
 
 		${R} [${W}-${R}]${G} IMPORTANT NOTICE !
 
+		${Y} -> ${C}Your VNC password has been set! Use it to connect via VNC Viewer.
+		
+		${Y} -> ${C}If you need to change your VNC password later, run:
+			 ${R} [${W}-${R}]${G} vncpasswd
+
 		${Y} -> ${C}If You have Problem with display then use
 			 ${R} [${W}-${R}]${G} Vncserver Resolution 1080x700 and other lower resolutions
 			 ${R} [${W}-${R}]${G} 1080x1080 or 1080x700 (recommended)
@@ -323,6 +328,36 @@ config() {
 	banner
 }
 
+setup_vnc_password() {
+	banner
+	echo -e "${B}═══════════════════════════════════════════════════${W}"
+	echo -e "${Y}            VNC PASSWORD SETUP${W}"
+	echo -e "${B}═══════════════════════════════════════════════════${W}\n"
+	
+	echo -e "${R} [${W}-${R}]${C} Setting up VNC password for user: ${Y}$username${W}\n"
+	
+	# Check if .vnc directory exists, create if not
+	if [ ! -d "/home/$username/.vnc" ]; then
+		mkdir -p "/home/$username/.vnc"
+		chown -R "$username:$username" "/home/$username/.vnc"
+	fi
+	
+	echo -e "${Y}Please set your VNC password:${W}"
+	echo -e "${C}(Password must be between 6-8 characters)${W}\n"
+	
+	# Run vncpasswd as the user
+	su - "$username" -c "vncpasswd"
+	
+	if [ $? -eq 0 ]; then
+		echo -e "\n${G}VNC password set successfully!${W}"
+		echo -e "${Y}Please remember this password for VNC Viewer connection.${W}\n"
+		sleep 2
+	else
+		echo -e "\n${R}Failed to set VNC password. You can set it later by running: ${Y}vncpasswd${W}\n"
+		sleep 3
+	fi
+}
+
 extras_menu() {
 	cat <<- EOF
 
@@ -352,5 +387,6 @@ check_root
 package
 install_softwares
 config
+setup_vnc_password
 extras_menu
 note

@@ -107,15 +107,27 @@ vnc_setup() {
 
 		${G}📺 VNC Connection Setup:${W}
 
-		${C}Step 1:${W} Start VNC Server
+		${C}Step 1:${W} Set VNC Password (during gui.sh setup)
+		   ${Y}The password prompt will appear automatically${W}
+		   ${Y}Password must be 6-8 characters${W}
+		   ${Y}The password WILL BE VISIBLE as you type${W}
+
+		${C}Step 2:${W} Start VNC Server
 		   ${Y}vncstart${W}
 
-		${C}Step 2:${W} Install VNC Viewer on your device
+		${C}Step 3:${W} Install VNC Viewer on your device
 		   ${Y}https://www.realvnc.com/download/viewer/${W}
 
-		${C}Step 3:${W} Connect to VNC
+		${C}Step 4:${W} Connect to VNC
 		   Address: ${G}localhost:1${W}
 		   Name: ${C}Ubuntu 26.04${W} (or anything you like)
+		   Password: ${Y}[Use the password you set]${W}
+
+		${G}🔑 Change VNC Password Anytime:${W}
+
+		   ${C}Method 1:${W} ${Y}vncpasswd${W} (quick command)
+		   ${C}Method 2:${W} ${Y}bash vnc-password-reset.sh${W} (guided)
+		   ${C}Method 3:${W} ${Y}sudo bash utilities.sh${W} → Reset VNC Password
 
 		${G}🎨 Recommended VNC Settings:${W}
 
@@ -136,6 +148,10 @@ vnc_setup() {
 		   • 1366x768
 
 		${G}❓ Common Issues:${W}
+
+		   ${R}Problem:${W} Forgot VNC password
+		   ${G}Solution:${W} Run ${Y}vncpasswd${W} or ${Y}bash vnc-password-reset.sh${W}
+		             to set a new password
 
 		   ${R}Problem:${W} Keyboard doesn't appear
 		   ${G}Solution:${W} Install Hacker's Keyboard from:

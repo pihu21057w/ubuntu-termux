@@ -160,6 +160,47 @@ change_vnc_resolution() {
 	fi
 }
 
+reset_vnc_password() {
+	banner
+	echo -e "${B}═══════════════════════════════════════════════════${W}"
+	echo -e "${Y}            VNC PASSWORD RESET${W}"
+	echo -e "${B}═══════════════════════════════════════════════════${W}\n"
+	
+	if [ -n "$SUDO_USER" ] && [ "$SUDO_USER" != "root" ]; then
+		username="$SUDO_USER"
+	else
+		username=$(ls /home | grep -Ev 'ubuntu|lost\+found' | head -n 1)
+		username=${username:-ubuntu}
+	fi
+	
+	echo -e "${C}Resetting VNC password for user: ${Y}$username${W}\n"
+	
+	if ! command -v vncpasswd &> /dev/null; then
+		echo -e "${R}Error: vncpasswd command not found.${W}"
+		echo -e "${Y}Please ensure VNC is properly installed.${W}"
+		return 1
+	fi
+	
+	echo -e "${Y}Please enter your new VNC password:${W}"
+	echo -e "${C}(Password must be between 6-8 characters)${W}\n"
+	
+	# Run vncpasswd as the user
+	su - "$username" -c "vncpasswd"
+	
+	if [ $? -eq 0 ]; then
+		echo -e "\n${G}VNC password reset successfully!${W}"
+		echo -e "${Y}Remember to use this password when connecting via VNC Viewer.${W}"
+		
+		# Check if VNC is running
+		if su - "$username" -c "pgrep -f Xvnc" > /dev/null; then
+			echo -e "\n${Y}VNC server is running. Consider restarting it:${W}"
+			echo -e "  ${G}vncstop && vncstart${W}"
+		fi
+	else
+		echo -e "\n${R}Failed to reset VNC password.${W}"
+	fi
+}
+
 show_menu() {
 	banner
 	cat <<- EOF
@@ -172,8 +213,9 @@ show_menu() {
 		${C} [${W}3${C}]  🧹 Clean System (Free up space)${W}
 		${C} [${W}4${C}]  💾 Backup User Settings${W}
 		${C} [${W}5${C}]  🖥️  Change VNC Resolution${W}
-		${C} [${W}6${C}]  📦 Install Extra Features${W}
-		${C} [${W}7${C}]  ℹ️  VNC Quick Help${W}
+		${C} [${W}6${C}]  🔑 Reset VNC Password${W}
+		${C} [${W}7${C}]  📦 Install Extra Features${W}
+		${C} [${W}8${C}]  ℹ️  VNC Quick Help${W}
 		${C} [${W}0${C}]  ❌ Exit${W}
 
 		${B}═══════════════════════════════════════════════════${W}
@@ -241,13 +283,17 @@ while true; do
 			read -p "Press Enter to continue..."
 			;;
 		6)
+			reset_vnc_password
+			read -p "Press Enter to continue..."
+			;;
+		7)
 			if [ -f "$(dirname "$0")/extras.sh" ]; then
 				bash "$(dirname "$0")/extras.sh"
 			else
 				bash <(curl -fsSL "https://raw.githubusercontent.com/modded-ubuntu/modded-ubuntu/master/distro/extras.sh")
 			fi
 			;;
-		7)
+		8)
 			vnc_help
 			read -p "Press Enter to continue..."
 			;;
